@@ -1,23 +1,37 @@
-import React, { Component} from 'react';
-import { render } from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, hashHistory, IndexRoute, IndexRedirect, Link } from 'react-router';
+import Home from './Home';
+import Users from './Users';
+import Header from './Header';
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-
-const root = document.getElementById('root');
-
-class App extends Component{
-  constructor(props){
-    super();
-    this.specialNumber = props.specialNumber; 
   }
-  render(){
+  render() {
     return (
-      <div className='well'>
-        { this.specialNumber }
-      </div> 
+      <div className='container'>
+        <Header pathname={ this.props.location.pathname } />
+        { this.props.children }
+
+      </div>
     );
   }
 }
 
 
-render(<App specialNumber={42}/>, root);
+const root = document.getElementById('root');
+
+ReactDOM.render(
+  <Router history={ hashHistory } >
+    <Route path='/' component={ App }>
+      <IndexRoute component={ Home } />
+      <Route path='/users' component={ Users } />
+    </Route>
+  </Router>,
+root);
+
+
+

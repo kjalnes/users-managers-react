@@ -2,25 +2,25 @@ const Sequelize = require('sequelize');
 
 const conn = new Sequelize(process.env.DATABASE_URL);
 
-const Product = conn.define('product', {
+const User = conn.define('user', {
   name: conn.Sequelize.STRING
 });
 
 const sync = ()=> conn.sync({ force: true });
 
 const seed = ()=> {
-  const products = ['foo', 'bar', 'bazz'];
+  const users = ['Moon', 'Leo', 'Nancy'];
 
   return sync()
     .then(()=> {
-      const promises = products.map(name => Product.create({ name }));
+      const promises = users.map(name => User.create({ name }));
       return Promise.all(promises);
     });
 };
 
 module.exports = {
   models: {
-    Product
+    User
   },
   sync,
   seed

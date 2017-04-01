@@ -4,23 +4,35 @@ import { Router, Route, hashHistory, IndexRoute, IndexRedirect, Link } from 'rea
 import Home from './Home';
 import Users from './Users';
 import Header from './Header';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = { users: [] }
   }
+  componentDidMount() {
+    axios.get('/api/users')
+    .then( response => response.data)
+    .then( users => this.onLoad( users ))
+  }
+
+  onLoad(users) {
+    this.setState({ users })
+  }
+
   render() {
+    const obj = Object.assign({}, this.state)
     return (
       <div className='container'>
         <Header pathname={ this.props.location.pathname } />
-        { this.props.children }
+
+        { this.props.children &&  React.cloneElement(this.props.children, obj) }
 
       </div>
     );
   }
 }
-
 
 const root = document.getElementById('root');
 

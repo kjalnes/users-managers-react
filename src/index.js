@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute, IndexRedirect, Link } from 'react-router';
 import Home from './Home';
 import Users from './Users';
+import UserEdit from './UserEdit';
 import Header from './Header';
 import axios from 'axios';
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = { users: [] }
@@ -20,6 +22,8 @@ class App extends React.Component {
   onLoad(users) {
     this.setState({ users })
   }
+
+
 
   render() {
     const obj = Object.assign({}, this.state)
@@ -41,6 +45,7 @@ ReactDOM.render(
     <Route path='/' component={ App }>
       <IndexRoute component={ Home } />
       <Route path='/users' component={ Users } />
+      <Route path='/users/edit' component={ UserEdit } />
     </Route>
   </Router>,
 root);

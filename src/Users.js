@@ -1,14 +1,32 @@
 import React from 'react';
 import UserItem from './UserItem';
+import UserEdit from './UserEdit';
 
-const Users = (props) => {
-    // console.log(props.users)
-    // const users =props.users.map( user => user.name ).join(', ')
+class Users extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = { view: 'UserItem' }
+    }
 
-    return (
-        <div>
-            { props.users.map( user =>  <UserItem user={ user } key={ user.id}/>)}
-        </div>
-    )
+
+    render() {
+        return (
+            <div>
+                { this.props.users.map( user =>  <UserItem key={ user.id} user={ user } manager={ user.manager } /> )}
+            </div>
+        )
+
+    }
 }
 export default Users;
+
+
+    //    this.showUserEdit = this.showUserEdit.bind(this);
+    //     this.showUserItem = this.showUserItem.bind(this);
+    // showUserEdit() {
+    //     this.setState({ view: 'UserEdit'})
+    // }
+
+    // showUserItem() {
+    //     this.setState({ view: 'UserItem'})
+    // }

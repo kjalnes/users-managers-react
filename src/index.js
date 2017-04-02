@@ -4,6 +4,7 @@ import { Router, Route, hashHistory, IndexRoute, IndexRedirect, Link } from 'rea
 import Home from './Home';
 import Users from './Users';
 import UserEdit from './UserEdit';
+import UserItem from './UserItem';
 import Header from './Header';
 import axios from 'axios';
 
@@ -44,8 +45,10 @@ ReactDOM.render(
   <Router history={ hashHistory } >
     <Route path='/' component={ App }>
       <IndexRoute component={ Home } />
-      <Route path='/users' component={ Users } />
-      <Route path='/users/edit' component={ UserEdit } />
+      <Route path='/users' component={ Users }>
+        <IndexRoute component={ UserItem } />
+        <Route path='/users/edit' component={ UserEdit } />
+      </Route>
     </Route>
   </Router>,
 root);

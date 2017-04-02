@@ -1,32 +1,20 @@
 import React from 'react';
 import UserItem from './UserItem';
-import UserEdit from './UserEdit';
 
-class Users extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = { view: 'UserItem' }
-    }
+const Users = (props) => {
+    // console.log("props", props)
+    // console.log("props.children", props.children)
 
+    const managers = props.users.filter(user => user.isManager );
 
-    render() {
-        return (
-            <div>
-                { this.props.users.map( user =>  <UserItem key={ user.id} user={ user } manager={ user.manager } /> )}
-            </div>
-        )
-
-    }
+    return (
+        <div>
+            { props.users.map(user => {
+                return props.children && React.cloneElement(props.children, { user: user, manager: user.manager, managers: managers, key: user.id })
+                })
+            }
+        </div>
+    )
 }
+
 export default Users;
-
-
-    //    this.showUserEdit = this.showUserEdit.bind(this);
-    //     this.showUserItem = this.showUserItem.bind(this);
-    // showUserEdit() {
-    //     this.setState({ view: 'UserEdit'})
-    // }
-
-    // showUserItem() {
-    //     this.setState({ view: 'UserItem'})
-    // }

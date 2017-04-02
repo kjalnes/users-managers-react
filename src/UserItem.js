@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const UserItem = (props) => {
-    console.log(props)
     const managerName = props.user.manager ? props.user.manager.name : 'nobody';
     return (
         <div className="panel panel-default"  >

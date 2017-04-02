@@ -2,16 +2,18 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const UserEdit = (props) => {
-    console.log(props)
-
-
+    const managers = props.managers.map( manager => <option value={manager.id} key={manager.id}>{ manager.name }</option>)
+    const manager = props.manager ? props.manager.id : 'nobody';
     return (
         <div className="panel panel-default"  >
             <div className="panel-heading">
-
+            {props.user.name}
             </div>
             <div className="panel-body">
-                Edit user
+                <select value={manager} onChange={ () => console.log('ch ch ch change')}>
+                    { managers }
+                    <option value='nobody'>nobody</option>
+                </select>
             </div>
         </div>
     )
@@ -19,12 +21,4 @@ const UserEdit = (props) => {
 
 export default UserEdit;
 
-
-
-
-// return (
-//      <div>
-//         { this.props.users.map( user =>  <UserEdit key={ user.id} user={ user }   getManager={ this.getManager } showItem={ this.showUserItem }/> )}
-//     </div>
-// )
 

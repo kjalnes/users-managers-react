@@ -12,9 +12,16 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { users: [] }
+    this.state = { users: [] };
+    this.onManagerChange = this.onManagerChange.bind(this);
+    this.fetchUsers = this.fetchUsers.bind(this);
   }
+
   componentDidMount() {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
     axios.get('/api/users')
     .then( response => response.data)
     .then( users => this.onLoad( users ))
@@ -24,14 +31,21 @@ class App extends React.Component {
     this.setState({ users })
   }
 
+  onManagerChange(userId, e) {
+      const updatedManagerId = e.target.value ? e.target.value : '';
+      axios.put(`/api/users/${userId}?managerId=${updatedManagerId}`)
+      .then(this.fetchUsers)
+      .then( () => window.location.hash = "#/users")
+    }
+
   render() {
-    const obj = Object.assign({}, this.state)
+    const obj = Object.assign({}, this.state, { onManagerChange: this.onManagerChange })
     return (
       <div className='container'>
         <Header pathname={ this.props.location.pathname } />
-
-        { this.props.children &&  React.cloneElement(this.props.children, obj) }
-
+          <div style={{margin: '30px 0'}}>
+          { this.props.children &&  React.cloneElement(this.props.children, obj) }
+          </div>
       </div>
     );
   }

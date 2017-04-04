@@ -6,13 +6,10 @@ const UserItem = (props) => {
     return (
         <div className="panel panel-default"  >
             <div className="panel-heading">
-            { props.user.name }
+                { props.user.name }
             </div>
             <div className="panel-body">
-                Managed by managerId:
-                <Link to='users/edit'>
-                    { managerName }
-                </Link>
+                Manager is: <Link to='users/edit'>{ managerName }</Link>
             </div>
         </div>
     )

@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
-
 const conn = new Sequelize(process.env.DATABASE_URL);
-
 
 const User = conn.define('user', {
   name: conn.Sequelize.STRING,
@@ -20,6 +18,9 @@ const seed = ()=> {
           User.create({name: 'Moon', isManager: true, managerId: null}),
           User.create({name: 'Leo', isManager: true, managerId: 1}),
           User.create({name: 'Nancy', isManager:false, managerId: 2}),
+          User.create({name: 'Corny', isManager:true, managerId: 2}),
+          User.create({name: 'Sindre', isManager:true, managerId: 4}),
+          User.create({name: 'Eva', isManager:false, managerId: 2})
         ]);
     })
 };

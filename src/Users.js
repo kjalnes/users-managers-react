@@ -2,8 +2,6 @@ import React from 'react';
 import UserItem from './UserItem';
 
 const Users = (props) => {
-    // console.log("props", props)
-    // console.log("props.children", props.children)
 
     const managers = props.users.filter(user => user.isManager );
 

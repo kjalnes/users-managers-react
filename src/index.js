@@ -24,8 +24,6 @@ class App extends React.Component {
     this.setState({ users })
   }
 
-
-
   render() {
     const obj = Object.assign({}, this.state)
     return (

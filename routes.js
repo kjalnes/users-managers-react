@@ -11,3 +11,7 @@ app.get('/users', (req, res, next)=> {
     .then( users => res.send(users) )
     .catch(next)
 })
+
+app.put('/users/edit', (req, res, next) => {
+    res.send('hi ha ')
+})
